@@ -1,0 +1,263 @@
+@font-face {
+  font-family: "Retro";
+  src: url("Retro Gaming.ttf");
+}
+body{
+  font-family: "Retro", serif !important;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.container{
+  color: #fff;
+  display: flex;
+  max-width: 1000px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#intro {
+  flex-direction: column;
+  display: flex;
+  gap: 5em;
+}
+h4{
+  font-weight: 400;
+  color: #ddd;
+}
+h2{
+  color: #777;
+}
+
+a,button{
+  cursor: pointer;
+}
+
+h1{
+  text-align: center;
+}
+
+img {
+  margin: auto;
+}
+
+footer {
+  padding: 10px;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  justify-content: space-between;
+}
+
+footer h5 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #777;
+}
+footer a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+footer img {
+  border-radius: 50%;
+  width: 24px;
+}
+
+#volume {
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  background: #777;
+  border-radius: 50%;
+  font-size: 24px;
+}
+
+/* Game */
+
+#prolog {
+  display: none;
+}
+#game {
+  display: none;
+}
+#lose {
+  display: none;
+}
+#win {
+  display: none;
+}
+#bad_end {
+  display: none;
+}
+
+#animation img {
+  max-width: 300px;
+}
+#animation {
+  position: relative;
+  display: flex;
+  max-width: 1000px;
+}
+
+#health {
+  padding: 5px;
+  margin: auto 30px;
+}
+
+#dialog {
+  z-index: 1;
+  padding: 20px;
+  margin: 30px;
+  width: 800px;
+  border: 3px solid #ccc;
+}
+.controls {
+  display: flex;
+  margin-top: 2em;
+  gap: 4em;
+  font-size: 69px;
+}
+
+.game-over-title {
+  font-size: 80px;
+  font-weight: 700;
+}
+
+#rock:hover{
+  animation: 0.5s shake infinite;
+}
+
+#paper:hover{
+  animation: 0.5s shake infinite;
+}
+
+#scissors:hover {
+  animation: 0.5s shake infinite;
+}
+
+/* Animations */
+
+#a {animation: 0.5s ease-out 0s shake;}
+#b {animation:1s ease-out wait, 0.5s ease-out 1s shake;}
+#c {animation:2s ease-out wait, 0.5s ease-out 2s shake;}
+#d {animation:3s ease-out wait, 0.5s ease-out 3s scale;}
+.e {animation:4s ease-out wait;}
+#antag {
+  animation:10s ease-out sanscome,10s ease-out 10s sanssteal;
+}
+#princess {
+  animation:10s ease-out 10s sanssteal;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+@keyframes wait {
+  0%,90%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+@keyframes sanscome {
+  0%{
+    transform: translateX(550%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes sanssteal {
+  0%{
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(500%);
+  }
+}
+
+@keyframes scale {
+  from{
+    transform: scale(0);
+  }
+  to{
+    transform: scale(1);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* reset.css */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+/*
+  Typographic tweaks!
+  4. Add accessible line-height
+  5. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+  6. Improve media defaults
+*/
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  7. Remove built-in form typography styles
+*/
+input, button, textarea, select {
+  font: inherit;
+}
+/*
+  8. Avoid text overflows
+*/
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+/*
+  9. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
