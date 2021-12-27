@@ -23,6 +23,12 @@
     <audio id="game-over">
       <source src="undertale-game-over.mp3" type="audio/mpeg">
     </audio>
+    <audio id="game_win">
+      <source src="ugh-fine-i-guess-you-are-my-little-pogchamp.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="game-win">
+      <source src="summer-time-anime-love_q5du5Qo.mp3" type="audio/mpeg">
+    </audio>
     <audio id="hit">
       <source src="undertale-sound-effect-attack-hit.mp3" type="audio/mpeg">
     </audio>
@@ -63,7 +69,11 @@
         <a class="atk" id="paper">🖐🏽</a>
         <a class="atk" id="scissors">✌🏽</a>
       </div>
-      <progress id="health" value="92" max="92"></progress>
+      <div class="health-stats">
+        <h3>Arch</h3>
+        <progress id="health" value="92" max="92"></progress>
+        <h3><span id="health__count"></span>/92</h4>
+      </div>
     </div>
     <!-- <div id="bad_end">
       <h1></h1>
@@ -73,7 +83,7 @@
     <div id="lose">
       <h1 class="game-over-title">GAME OVER</h1>
       <h4 id="lose-dialog"></h4>
-      <div>
+      <div class="controls">
         <button class="a"><a href="">Go home</a></button>
         <button id="start-game" class="b">Try again?</button>
       </div>

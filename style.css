@@ -106,8 +106,20 @@ footer img {
 }
 
 #health {
-  padding: 5px;
+  height: 1.5em;
   margin: auto 30px;
+  background: #ff0;
+  color: #ff0;
+}
+progress::-moz-progress-bar { background: #ff0; }
+progress::-webkit-progress-value { background: #ff0; }
+
+.health-stats {
+  justify-content: center;
+  display: flex;
+  margin: 5px;
+  padding: 10px;
+  gap: 1em;
 }
 
 #dialog {
@@ -122,6 +134,10 @@ footer img {
   margin-top: 2em;
   gap: 4em;
   font-size: 69px;
+  padding: 1em;
+
+  border: 3px solid #ccc;
+
 }
 
 .game-over-title {

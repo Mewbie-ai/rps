@@ -1,35 +1,40 @@
 // Constants
 const container = document.querySelector('.container');
-const startBtn = document.getElementById("start");
 const playBtn = document.querySelectorAll("#start-game");
 const volumeBtn = document.getElementById("volume");
-const home = document.getElementById("intro");
-const prolog = document.getElementById("prolog");
+const startBtn = document.getElementById("start");
+const healthCount = document.getElementById("health__count")
 const healthBar = document.getElementById("health")
-const loseDialog = document.getElementById("dialog");
+const prolog = document.getElementById("prolog");
 const dialog = document.getElementById("dialog");
+const loseDialog = document.getElementById("lose-dialog");
+const home = document.getElementById("intro");
 const game = document.getElementById("game");
+const miss = document.getElementById("miss");
 const lose = document.getElementById("lose");
 const win = document.getElementById("win");
-const miss = document.getElementById("miss");
 const rock = document.getElementById("rock");
 const paper = document.getElementById("paper");
 const scissors = document.getElementById("scissors");
-  // Audios
-  const music = document.getElementById('music');
+  
+// Audios
+
   const prolog_music = document.getElementById('prolog_music');
-  const save = document.getElementById('save');
+  const damageTaken = document.getElementById('damage-taken');
   const game_over = document.getElementById('game_over');
   const gameOver = document.getElementById('game-over');
-  const damageTaken = document.getElementById('damage-taken');
-  const hit = document.getElementById('hit');
+  const game_win = document.getElementById('game_win');
+  const gameWin = document.getElementById('game-win');
   const heh = document.getElementById('sans-voice');
+  const music = document.getElementById('music');
+  const save = document.getElementById('save');
+  const hit = document.getElementById('hit');
 
 
 
 // Variables
 let musicOn = false;
-var player, sans = 'r', life = maxHealth, maxHealth = 92, choices = ['r', 'p', 's'], dmg = 0, sans_life = 10006;
+var player, sans = 'r',sansHeath=10008, sans_life = sansHeath, life = maxHealth, maxHealth = 92, choices = ['r', 'p', 's'], dmg = 0;
 music.volume = 0.4, heh.volume = 0.4, save.volume = 0.4, damageTaken.volume = 0.4, hit.volume = 0.4, prolog_music.volume = 0.4;
 game_over.volume = 0.1;
 
@@ -42,7 +47,6 @@ let txt2 = `You can do this onii-chan, we belive in you! 👧🏼👧🏻👧�
 
 // Prologue script
 let i = 0;
-let j = 0;
 let speed = 50;
 function typeWriter() {
   if (i < txt.length) {
@@ -51,11 +55,12 @@ function typeWriter() {
     setTimeout(typeWriter, speed);
   }
 }
+let j = 0;
 function typeWriter2() {
   if (j < txt2.length) {
-    loseDialog.textContent += txt2.charAt(i);
+    loseDialog.textContent += txt2.charAt(j);
     j++;
-    setTimeout(typeWriter, speed);
+    setTimeout(typeWriter2, speed);
   }
 }
 
@@ -67,7 +72,7 @@ document.querySelectorAll('.atk').forEach(opt => {
 
 function sansMotive(lol) {
   let random = Math.floor(Math.random() * lol.length);
-  dmg = Math.floor(life/3 + (Math.random() * (life - life/3))); // dmg formula
+  dmg = Math.floor(maxHealth/3 + (Math.random() * (maxHealth - maxHealth/3))); // dmg formula
   sans = lol[random];
 }
 
@@ -77,56 +82,78 @@ scissors.onclick = () => player = 's';
 
 function gameLogic() {
   if(player === 'r' && sans === 's' || player === 'p' && sans === 'r' || player === 's' && sans === 'p') {
+    healthCount.textContent = maxHealth;
+    healthBar.value = maxHealth;
     sansMotive(choices);
+    life = maxHealth;
+    sans_life -= 1;
     dodgejs.play();
     missjs.play();
+
     heh.play();
-    life = 92;
-    healthBar.value = 92;
-    sans_life -= 1;
   } else {
-    damageTaken.play();
-    life -= dmg;
+    healthCount.textContent -= dmg;
     healthBar.value -= dmg;
+    life -= dmg;
+    
+    damageTaken.play();
   }
 
   if(life <= 0){
     game.style.display = "none";
     lose.style.display = "block";
-    typeWriter2(txt2);
+    
     music.pause();
     gameOver.play();
     game_over.play();
+
+    typeWriter2(txt2);
   }
 
   if(sans_life < 10000){
     game.style.display = "none";
     win.style.display = "block";
+
+    music.pause();
+    gameWin.play();
+    game_win.play();
   }
 } 
 
 startBtn.addEventListener("click", () => {
-  prolog_music.play();
-  home.style.display = "none";
   prolog.style.display = "block";
+  home.style.display = "none";
   typeWriter(dialog);
   yoinkjs.play();
+
+  prolog_music.play();
 })
 
 playBtn.forEach(opt => {
   opt.addEventListener("click", () => {
-    prolog_music.pause();
-    music.play();
-    slushjs.play();
-    stancejs.play();
-    lose.style.display = "none";
     prolog.style.display = "none";
     game.style.display = "block";
-    life = 92;
-    healthBar.value = 92;
-    sans_life = 10006;
+    lose.style.display = "none";
+    healthCount.textContent = maxHealth;
+    healthBar.value = maxHealth;
+    sans_life = sansHeath;
+    life = maxHealth;
+    stancejs.play();
+    slushjs.play();
+  
+    prolog_music.pause();
+    music.play();
   })
 })
+
+
+
+
+
+
+
+
+
 // anime.js
 
 let slushjs = anime({
@@ -197,15 +224,16 @@ volumeBtn.addEventListener("click", ()=> {
 })
 
 function mute() {
-  musicOn = false;
+  volumeBtn.textContent = "🔈";
   prolog_music.volume = 0;
   music.volume = 0;
-  volumeBtn.textContent = "🔈";
+  musicOn = false;
 }
 function unmute() {
-  save.play()
-  musicOn = true;
+  volumeBtn.textContent = "🔊";
   prolog_music.volume = 0.4;
   music.volume = 0.4;
-  volumeBtn.textContent = "🔊";
+  musicOn = true;
+ 
+  save.play()
 }
